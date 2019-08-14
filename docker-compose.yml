@@ -1,0 +1,17 @@
+version: '3.7'
+services:
+  bot:
+    build: .
+    command: bundle exec ruby bot.rb
+    depends_on:
+      - db
+    volumes:
+      - .:/memach/
+    env_file:
+      - .env
+  db:
+    image: postgres:11.5
+    volumes:
+      - ./db/data/pgdata:/var/lib/postgresql/data/pgdata
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
