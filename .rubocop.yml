@@ -1,0 +1,36 @@
+inherit_mode:
+  merge:
+    - Exclude
+
+AllCops:
+  TargetRubyVersion: 2.6
+  DisplayCopNames: true
+
+Style/Documentation:
+  Enabled: false
+
+Style/NumericLiterals:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 100
+
+Metrics/BlockLength:
+  ExcludedMethods:
+    - context
+    - describe
+    - feature
+    - it
+    - namespace
+  Exclude:
+    - db/schema.rb
+
+Metrics/MethodLength:
+  Max: 15
+  ExcludedMethods:
+    - change
+
+Metrics/AbcSize:
+  Max: 17
+  Exclude:
+    - db/migrate/*

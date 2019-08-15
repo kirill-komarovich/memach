@@ -1,0 +1,15 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: '5'
+  host: db
+  password: postgres
+  username: postgres
+
+development:
+  <<: *default
+  database: memach_development
+
+test:
+  <<: *default
+  database: memach_test
