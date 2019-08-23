@@ -6,8 +6,8 @@ git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
 ruby '2.6.3'
 
-gem 'activerecord', '~> 5.2', '>= 5.2.3'
-gem 'activesupport', '~> 5.2', '>= 5.2.3'
+gem 'activerecord', '~> 6.0'
+gem 'activesupport', '~> 6.0'
 gem 'dotenv', '~> 2.7', '>= 2.7.5'
 gem 'dry-system', '~> 0.12.0'
 gem 'pg', '>= 0.18', '< 2.0'

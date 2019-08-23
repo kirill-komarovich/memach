@@ -1,10 +1,10 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  pool: '5'
-  host: db
-  password: postgres
-  username: postgres
+  pool: <%= ENV.fetch("DB_MAX_THREADS") { 5 } %>
+  host: <%= ENV['DB_HOST'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
+  username: <%= ENV['DB_USER'] %>
 
 development:
   <<: *default
@@ -13,3 +13,6 @@ development:
 test:
   <<: *default
   database: memach_test
+
+production:
+  url: <%= ENV['DATABASE_URL'] %>

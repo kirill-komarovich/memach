@@ -3,24 +3,22 @@
 require 'dry/system/container'
 require 'dry/system/components'
 require 'yaml'
+require 'erb'
 
 class Application < Dry::System::Container
   setting :token
-  setting :database, reader: true
+  setting :database_config, reader: true
   use :env, inferrer: -> { ENV.fetch('BOT_ENV', :development).to_sym }
   use :logging
 
   configure do |config|
     config.auto_register = 'lib'
     config.token = ENV.fetch('BOT_TOKEN')
-    config.logger = Logger.new('/proc/1/fd/1')
-    if config.env == :production
-      config.database = { url: ENV.fetch('DB_URL') }
-    else
-      database_config = YAML.load_file(File.join(__dir__, '../config', 'database.yml'))
-      config.database = database_config.fetch(config.env.to_s)
-    end
+    config.logger = Logger.new(STDOUT)
+    database_config_path = File.join(root, 'config', 'database.yml')
+    database_config_file = ERB.new(File.read(database_config_path)).result
+    config.database_config = YAML.safe_load(database_config_file, [], [], true)
   end
 
-  load_paths!('lib', 'system')
+  load_paths!('lib')
 end

@@ -1,71 +1,25 @@
 # frozen_string_literal: true
 
 require 'bundler/setup'
-require 'dotenv/load'
 require_relative 'system/container'
 
-Application.finalize!
+STDOUT.sync = true
+Bundler.require(:default, Application.env)
+Dotenv.load('.env', ".env.#{Application.env}")
+
+Dir.glob('lib/tasks/*.rake').each { |r| load r }
 
 if %i[development test].include? Application.env
   require 'rubocop/rake_task'
   require 'bundler/audit/task'
+  require 'rspec/core/rake_task'
+
   Bundler::Audit::Task.new
   RuboCop::RakeTask.new
+  RSpec::Core::RakeTask.new(:spec)
 
   task(:default).clear
-  task default: %i[bundle:audit rubocop eslint spec]
-end
-
-namespace :db do
-  desc 'Create the database'
-  task :create do
-    ActiveRecord::Base.establish_connection(Application.database.merge(
-                                              'database' => 'postgres',
-                                              'schema_search_path' => 'public'
-                                            ))
-    ActiveRecord::Base.connection.create_database(Application.database['database'])
-    puts "Database #{Application.database['database']} created"
-  end
-
-  desc 'Migrate the database'
-  task :migrate do
-    ActiveRecord::Base.establish_connection(Application.database)
-    ActiveRecord::MigrationContext.new('db/migrate/').migrate
-    Rake::Task['db:schema'].invoke
-    puts 'Database migrated.'
-  end
-
-  desc 'Migrate the database'
-  task :rollback do
-    ActiveRecord::Base.establish_connection(db_config)
-    ActiveRecord::MigrationContext.new('db/migrate/').rollback
-    Rake::Task['db:schema'].invoke
-    puts 'Last migration has been reverted.'
-  end
-
-  desc 'Drop the database'
-  task :drop do
-    ActiveRecord::Base.establish_connection(Application.database.merge(
-                                              'database' => 'postgres',
-                                              'schema_search_path' => 'public'
-                                            ))
-    ActiveRecord::Base.connection.drop_database(Application.database['database'])
-    puts "Database #{Application.database['database']} deleted"
-  end
-
-  desc 'Reset the database'
-  task reset: %i[drop create migrate]
-
-  desc 'Create a db/schema.rb file that is portable against any DB supported by AR'
-  task :schema do
-    ActiveRecord::Base.establish_connection(Application.database)
-    require 'active_record/schema_dumper'
-
-    filename = 'db/schema.rb'
-    File.open(filename, 'w:utf-8') do |file|
-      ActiveRecord::SchemaDumper.dump(ActiveRecord::Base.connection, file)
-    end
-  end
+  task default: %i[bundle:audit rubocop spec]
 end
 
 namespace :g do
@@ -78,7 +32,7 @@ namespace :g do
 
     File.open(path, 'w') do |file|
       file.write <<~MIGRATION
-        class #{migration_class} < ActiveRecord::Migration[5.2]
+        class #{migration_class} < ActiveRecord::Migration[6.0]
           def self.change
           end
         end
