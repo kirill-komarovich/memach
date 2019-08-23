@@ -11,4 +11,4 @@ RUN bundle install --path $BUNDLE_PATH --jobs 4
 
 COPY . .
 
-CMD ["ruby", "bin/bot"]
+CMD ["bundle", "exec", "bin/bot"]

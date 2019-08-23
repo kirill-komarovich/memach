@@ -6,7 +6,7 @@ class AddUsers < ActiveRecord::Migration[5.2]
       t.string :username, null: false
       t.integer :telegram_id, null: false
       t.string :first_name, null: false, default: ''
-      t.string :last_name, null: false, default: ''
+      t.string :last_name, default: ''
       t.string :language_code, null: false, default: ''
       t.boolean :is_bot, null: false, default: false
     end

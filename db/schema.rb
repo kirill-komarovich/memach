@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2019_08_15_121154) do
     t.string "username", null: false
     t.integer "telegram_id", null: false
     t.string "first_name", default: "", null: false
-    t.string "last_name", default: "", null: false
+    t.string "last_name", default: ""
     t.string "language_code", default: "", null: false
     t.boolean "is_bot", default: false, null: false
     t.index ["telegram_id"], name: "index_users_on_telegram_id", unique: true
