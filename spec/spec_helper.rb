@@ -6,6 +6,7 @@ require 'rubygems'
 require 'bundler'
 
 Bundler.require(:default, :test)
+Dotenv.load('.env', '.env.test')
 Dir[File.dirname(__FILE__) + '/support/**/*.rb'].each { |f| require f }
 SimpleCov.start 'bot'
 
