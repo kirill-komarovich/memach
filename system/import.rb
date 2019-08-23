@@ -2,4 +2,4 @@
 
 require 'container'
 
-Import = Application.injector
+Import = Bot.injector

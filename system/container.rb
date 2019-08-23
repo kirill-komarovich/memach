@@ -5,7 +5,7 @@ require 'dry/system/components'
 require 'yaml'
 require 'erb'
 
-class Application < Dry::System::Container
+class Bot < Dry::System::Container
   setting :token
   setting :database_config, reader: true
   use :env, inferrer: -> { ENV.fetch('BOT_ENV', :development).to_sym }

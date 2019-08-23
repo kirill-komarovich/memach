@@ -10,5 +10,5 @@ STDOUT.sync = true
 Bundler.require(:default, env)
 Dotenv.load('.env', ".env.#{env}")
 
-Application.finalize!
-Application['memach.runner'].run unless ENV['BOT_CONSOLE']
+Bot.finalize!
+Bot['memach.runner'].run unless ENV['BOT_CONSOLE']

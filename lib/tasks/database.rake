@@ -14,15 +14,15 @@ class Seeder
   end
 end
 
-seed_loader = Seeder.new(File.join(Application.root, 'db/seeds.rb'))
+seed_loader = Seeder.new(File.join(Bot.root, 'db/seeds.rb'))
 
-ActiveRecord::Tasks::DatabaseTasks.env = Application.env.to_s
-ActiveRecord::Tasks::DatabaseTasks.database_configuration = Application.database_config
-ActiveRecord::Tasks::DatabaseTasks.db_dir = File.join(Application.root, 'db')
-ActiveRecord::Tasks::DatabaseTasks.fixtures_path = File.join(Application.root, 'test/fixtures')
-ActiveRecord::Tasks::DatabaseTasks.migrations_paths = [File.join(Application.root, 'db/migrate')]
+ActiveRecord::Tasks::DatabaseTasks.env = Bot.env.to_s
+ActiveRecord::Tasks::DatabaseTasks.database_configuration = Bot.database_config
+ActiveRecord::Tasks::DatabaseTasks.db_dir = File.join(Bot.root, 'db')
+ActiveRecord::Tasks::DatabaseTasks.fixtures_path = File.join(Bot.root, 'test/fixtures')
+ActiveRecord::Tasks::DatabaseTasks.migrations_paths = [File.join(Bot.root, 'db/migrate')]
 ActiveRecord::Tasks::DatabaseTasks.seed_loader = seed_loader
-ActiveRecord::Tasks::DatabaseTasks.root = Application.root
+ActiveRecord::Tasks::DatabaseTasks.root = Bot.root
 
 task :environment do
   ActiveRecord::Base.configurations = ActiveRecord::Tasks::DatabaseTasks.database_configuration

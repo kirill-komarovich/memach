@@ -12,8 +12,8 @@ SimpleCov.start 'bot'
 require_relative '../system/container'
 require 'dry/system/stubs'
 
-Application.enable_stubs!
-Application.finalize!
+Bot.enable_stubs!
+Bot.finalize!
 
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
