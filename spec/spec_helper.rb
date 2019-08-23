@@ -15,6 +15,7 @@ require 'dry/system/stubs'
 
 Bot.enable_stubs!
 Bot.finalize!
+Bot.stub('telegram.bot', DummyBot.new)
 
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|

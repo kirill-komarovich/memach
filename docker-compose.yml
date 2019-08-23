@@ -2,7 +2,6 @@ version: '3.7'
 services:
   bot:
     build: .
-    command: ruby bin/bot
     depends_on:
       - db
     volumes:
