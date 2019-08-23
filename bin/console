@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+# frozen_string_literal: true
+
+ENV['BOT_CONSOLE'] = 'true'
+
+require_relative '../system/boot'
+require 'irb'
+
+IRB.start
