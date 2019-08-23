@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/hetchback/memach/tree/master.svg?style=svg)](https://circleci.com/gh/hetchback/memach/tree/master)
 # Telegram bot for relaying memes from VK
 
 ## Installation
