@@ -6,24 +6,14 @@ require 'rubygems'
 require 'bundler'
 
 Bundler.require(:default, :test)
+Dir[File.dirname(__FILE__) + '/support/**/*.rb'].each { |f| require f }
+SimpleCov.start 'bot'
+
 require_relative '../system/container'
 require 'dry/system/stubs'
 
 Application.enable_stubs!
 Application.finalize!
-Dir[File.dirname(__FILE__) + '/support/**/*.rb'].each { |f| require f }
-require 'simplecov'
-
-SimpleCov.start do
-  add_filter %r{^/spec/}
-  add_filter %r{^/config/}
-  add_filter %r{^/db/}
-
-  add_group 'Message handles', 'lib/memach/message_handlers'
-  add_group 'Models', 'lib/models'
-
-  track_files 'lib/**/*.rb'
-end
 
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|

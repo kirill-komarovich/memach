@@ -1,4 +1,6 @@
 db/data
 vendor
-.env
+.env.*
+!.env.test
+!.env.*.example
 coverage

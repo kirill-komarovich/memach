@@ -6,8 +6,8 @@ Application.boot(:database) do
     require 'pg'
   end
 
-  start do |container|
-    ActiveRecord::Base.logger = container.config.logger unless container.config.env == :test
-    ActiveRecord::Base.establish_connection(container.config.database)
+  start do
+    ActiveRecord::Base.logger = Application.logger unless Application.env == :test
+    ActiveRecord::Base.establish_connection(Application.database_config.fetch(Application.env.to_s))
   end
 end
