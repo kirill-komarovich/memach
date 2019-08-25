@@ -33,7 +33,7 @@ namespace :g do
     File.open(path, 'w') do |file|
       file.write <<~MIGRATION
         class #{migration_class} < ActiveRecord::Migration[6.0]
-          def self.change
+          def change
           end
         end
       MIGRATION
