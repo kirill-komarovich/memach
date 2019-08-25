@@ -11,7 +11,7 @@ module MessageHandlers
 
       user_params = message.from.to_h
       user_params[:telegram_id] = user_params.delete(:id)
-      @user = User.new(user_params)
+      @user = User.new(user_params.merge(chat_id: chat_id))
     end
 
     def handle

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_15_121154) do
+ActiveRecord::Schema.define(version: 2019_08_25_122136) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2019_08_15_121154) do
     t.string "last_name", default: ""
     t.string "language_code", default: "", null: false
     t.boolean "is_bot", default: false, null: false
+    t.integer "chat_id"
     t.index ["telegram_id"], name: "index_users_on_telegram_id", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end
