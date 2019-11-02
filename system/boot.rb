@@ -5,10 +5,9 @@ require_relative 'container'
 require_relative 'import'
 require_relative '../lib/memach'
 
-env = ENV.fetch('BOT_ENV', :development).to_sym
 STDOUT.sync = true
-Bundler.require(:default, env)
-Dotenv.load('.env', ".env.#{env}")
+Bundler.require(:default, Bot.env)
+Dotenv.load('.env', ".env.#{Bot.env}")
 
 Bot.finalize!
 Bot['memach.runner'].run unless ENV['BOT_CONSOLE']

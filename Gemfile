@@ -6,12 +6,16 @@ git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
 ruby '2.6.3'
 
-gem 'activerecord', '~> 6.0'
 gem 'activesupport', '~> 6.0'
 gem 'dotenv', '~> 2.7', '>= 2.7.5'
-gem 'dry-system', '~> 0.12.0'
+gem 'dry-monads', '~> 1.3', '>= 1.3.1'
+gem 'dry-system', '~> 0.13.0'
+gem 'dry-transaction', '~> 0.13.0'
+gem 'dry-validation', '~> 1.3', '>= 1.3.1'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'rake', '~> 12.3', '>= 12.3.3'
+gem 'rom', '~> 5.1', '>= 5.1.2'
+gem 'rom-sql', '~> 3.0', '>= 3.0.1'
 gem 'telegram-bot-ruby', '~> 0.11.0'
 
 group :development, :test do

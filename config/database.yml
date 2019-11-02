@@ -1,10 +1,10 @@
 default: &default
-  adapter: postgresql
+  adapter: <%= ENV.fetch('DB_ADAPTER') { 'postgres' } %>
   encoding: unicode
-  pool: <%= ENV.fetch("DB_MAX_THREADS") { 5 } %>
-  host: <%= ENV['DB_HOST'] %>
-  password: <%= ENV['DB_PASSWORD'] %>
-  username: <%= ENV['DB_USER'] %>
+  pool: <%= ENV.fetch('DB_MAX_THREADS') { 5 } %>
+  host: <%= ENV.fetch('DB_HOST') { 'db' } %>
+  password: <%= ENV.fetch('DB_PASSWORD') { 'postgres' } %>
+  username: <%= ENV.fetch('DB_USER') { 'postgres' } %>
 
 development:
   <<: *default
