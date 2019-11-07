@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe MessageHandlers::BaseHandler do
+RSpec.describe MessageHandlers::AbstractHandler do
   subject { described_class.new(message: {}) }
 
   describe '#handle' do
