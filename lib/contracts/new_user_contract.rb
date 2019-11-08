@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'dry-validation'
 
 class NewUserContract < Dry::Validation::Contract
