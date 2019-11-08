@@ -6,7 +6,7 @@ Bot.boot(:telegram) do
   end
 
   start do |container|
-    bot = Telegram::Bot::Client.new(container.config.token, logger: Bot.logger)
+    bot = Telegram::Bot::Client.new(container.config.token, logger: container.logger)
     container.register('telegram.bot', bot)
   end
 end
