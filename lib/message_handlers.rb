@@ -1,11 +1,20 @@
 # frozen_string_literal: true
 
-module MessageHandlers
-  MESSAGE_ENTITY_TYPES = [
-    BOT_COMMAND = 'bot_command'
-  ].freeze
+require 'types/message_entities/bot_command'
 
-  def self.handle(message)
-    StartHandler.new(message: message).handle
+module MessageHandlers
+  class << self
+    def handle(message)
+      handler_for(message).new(message: message).call
+    end
+
+    def handler_for(message)
+      case message
+      when Types::MessageEntities::BotCommand
+        CommandHandler.handler_class(message.text)
+      else
+        UnknownHandler
+      end
+    end
   end
 end

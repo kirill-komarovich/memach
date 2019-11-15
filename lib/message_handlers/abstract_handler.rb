@@ -3,16 +3,17 @@
 require 'import'
 
 module MessageHandlers
-  class BaseHandler
-    include Import['logger', 'telegram.bot']
+  class AbstractHandler
+    include Import['telegram.bot']
 
     def initialize(params)
       @message = params.delete(:message)
       @chat_id = @message.chat.id
+
       super(params)
     end
 
-    def handle
+    def call
       raise NotImplementedError
     end
 
