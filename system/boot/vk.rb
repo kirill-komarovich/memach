@@ -2,6 +2,7 @@
 
 Bot.boot(:vk) do
   init do
+    require 'faraday'
     require 'services/vk/api'
   end
 
