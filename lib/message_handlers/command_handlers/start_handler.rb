@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 require 'import'
-require 'transactions/create_user'
+require 'transactions/create_record'
 require 'message_handlers/command_handler'
 
 module MessageHandlers
   module CommandHandlers
     class StartHandler < CommandHandler
-      include Import['rom']
+      include Import[:rom]
 
       for_command '/start'
 
@@ -37,7 +37,22 @@ module MessageHandlers
       attr_reader :user_params
 
       def add_user(attributes, &block)
-        CreateUser.new.call(attributes, &block)
+        CreateRecord.new.with_step_args(
+          validate: [contract: new_user_contract],
+          create: [repository: repository]
+        ).call(attributes, &block)
+      end
+
+      def new_user_contract
+        @new_user_contract ||= NewUserContract.new(uniquness_validator: uniquness_validator)
+      end
+
+      def uniquness_validator
+        @uniquness_validator ||= Validators::Uniquness.new(rom.relations.users)
+      end
+
+      def repository
+        @repository ||= UserRepository.new(rom)
       end
     end
   end
