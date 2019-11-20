@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UserRepository < ROM::Repository[:users]
-  commands :create, update: :by_pk, delete: :by_pk, mapper: :user
+  commands :create, mapper: :user
 
   def create(attributes)
     users.transaction do

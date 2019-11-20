@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class UsersRelation < ROM::Relation[:sql]
-  gateway :default
-
-  schema(:users, infer: true)
+  schema(:users, infer: true) do
+    associations do
+      has_many :groups
+    end
+  end
 end
