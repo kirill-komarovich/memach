@@ -1,21 +1,20 @@
 # frozen_string_literal: true
 
-require 'json'
-require 'services/vk/connection'
-
 module Vk
   class Api
     def groups(method, params)
       call(:groups, method, params)
     end
 
-    private
-
     def call(resource, method, params)
       response = send_request(resource, method, params)
+      parsed_response = JSON.parse(response.body, symbolize_names: true)
+      raise ApiCallError, parsed_response[:error] unless parsed_response[:error].nil?
 
-      JSON.parse(response.body, symbolize_names: true).fetch(:response)
+      parsed_response.fetch(:response)
     end
+
+    private
 
     def connection
       @connection ||= Connection.new

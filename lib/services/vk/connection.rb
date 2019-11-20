@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'faraday'
-require 'forwardable'
-
 module Vk
   class Connection
     extend Forwardable
