@@ -23,6 +23,7 @@ group :development, :test do
   gem 'bundler-audit', '~> 0.6.1'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'ffaker', '~> 2.11'
+  gem 'pry', '~> 0.12.2'
   gem 'rom-factory', '~> 0.9.1'
   gem 'rspec', '~> 3.8'
   gem 'rubocop', '~> 0.74.0'
