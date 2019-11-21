@@ -5,9 +5,9 @@ require 'import'
 
 module Contracts
   class NewUserContract < Dry::Validation::Contract
-    include Import['validators.uniquness']
+    include Import['validators.database_uniquness']
 
-    option :uniquness
+    option :database_uniquness
 
     schema do
       required(:first_name).value(:string)
@@ -21,7 +21,13 @@ module Contracts
     end
 
     rule(:telegram_id) do
-      key.failure('already exists') unless uniquness[:users].call(values.slice(:telegram_id))
+      key.failure('already exists') unless unique_record?(values.slice(:telegram_id))
+    end
+
+    private
+
+    def unique_record?(attributes)
+      database_uniquness.call(:users, attributes)
     end
   end
 end
