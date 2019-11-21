@@ -7,7 +7,9 @@ module Operations
     include Dry::Transaction::Operation
 
     def call(input, repository:)
-      Success(repository.create(input))
+      repository.transaction do
+        Success(repository.create(input))
+      end
     end
   end
 end
