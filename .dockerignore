@@ -1,8 +1,9 @@
+.circleci/
 .git/
-log/
 db/data/
-vendor/*
+vendor/
+.env*
+.gitignore
 Dockerfile
 docker-compose.yml
-.env
-.gitignore
+README.md
