@@ -1,7 +1,9 @@
-FROM ruby:2.6.3
+FROM ruby:2.6.3-alpine
 
 ENV APP_ROOT=/memach
 ENV BUNDLE_PATH=${APP_ROOT}/vendor/bundle
+
+RUN apk add --update --no-cache build-base ruby-dev postgresql-dev
 
 WORKDIR ${APP_ROOT}
 
