@@ -24,9 +24,5 @@ module MessageHandlers
     def send_message(params)
       bot.api.send_message(params.merge(chat_id: chat_id))
     end
-
-    def bot_command?
-      message.entities.any? { |entity| entity.type == BOT_COMMAND }
-    end
   end
 end
