@@ -3,8 +3,8 @@
 require 'types/message_entities/bot_command'
 
 module MessageHandlers
-  class << self
-    def handle(message)
+  class ApplicationHandler
+    def call(message)
       handler_for(message).new(message: message).call
     end
 
