@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
-require 'message_handlers/abstract_handler'
-
-module MessageHandlers
-  class CommandHandler < AbstractHandler
+module Handlers
+  class CommandHandler < ApplicationHandler
     class << self
       attr_reader :command
 
