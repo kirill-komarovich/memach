@@ -4,15 +4,14 @@ require 'import'
 
 module Handlers
   module CommandHandlers
-    class StartHandler < CommandHandler
+    class StartHandler < ApplicationHandler
       include Import[
         :rom,
         'transactions.create_record',
         'repositories.user_repository',
         'contracts.new_user_contract'
       ]
-
-      for_command '/start'
+      include CommandHandler['/start']
 
       def call
         add_user(user_params) do |result|
