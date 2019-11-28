@@ -6,6 +6,6 @@ module Repositories
   class UserRepository < ROM::Repository[:users]
     include Import.args[:rom]
 
-    commands :create, mapper: :user
+    commands :create
   end
 end

@@ -3,7 +3,7 @@
 require 'import'
 
 class Runner
-  include Import['telegram.bot', 'message_handlers.application_handler']
+  include Import['telegram.bot', 'handlers.application_handler']
 
   def call
     bot.listen do |message|
