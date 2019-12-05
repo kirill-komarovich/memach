@@ -4,10 +4,7 @@ Bot.boot(:vk) do
   init do
     require 'faraday'
     require 'services/vk/api'
-  end
 
-  start do |container|
-    vk_api = Vk::Api.new
-    container.register('vk', vk_api)
+    register('vk', Vk::Api.new)
   end
 end
