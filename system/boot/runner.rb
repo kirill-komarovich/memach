@@ -1,12 +1,9 @@
 # frozen_string_literal: true
 
 Bot.boot(:runner) do
-  init do
+  start do
     require 'runner'
-  end
 
-  start do |container|
-    runner = Runner.new
-    container.register('runner', runner)
+    register('runner', Runner.new)
   end
 end

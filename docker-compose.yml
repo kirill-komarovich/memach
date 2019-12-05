@@ -6,8 +6,6 @@ services:
       - db
     volumes:
       - .:/memach/
-    env_file:
-      - .env.development
     stdin_open: true
     tty: true
   db:
